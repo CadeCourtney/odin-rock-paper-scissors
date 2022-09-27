@@ -12,7 +12,7 @@ function getComputerChoice() {
 }
 
 function playRound(player, computer) {
-    let playerChoice = player.toLowerCase(), computerChoice = computer.toLowerCase();
+    let playerChoice = player, computerChoice = computer.toLowerCase();
     switch(true) {
         case(playerChoice === computerChoice):
             // return "Tie!";
@@ -42,49 +42,68 @@ function playRound(player, computer) {
 }
 
 function game(choice) {
-    let winner, playerScore = 0, computerScore = 0;
-        const body = document.querySelector('body');
+    const result = document.querySelector(".result")
+    const body = document.querySelector('body');
+    if(result != null) {
+        body.removeChild(result);
+    }
+    let winner, playerScore = 0, computerScore = 0, tieScore = 0;
         // let playerSelection = prompt("Rock, Paper, or Scissors...");
         let computerSelection = getComputerChoice();
         winner = playRound(choice, computerSelection);
+        console.log(winner);
         if (winner == 0) {
-            body.appendChild()
+            const win = document.createElement("h1");
+            win.classList.add("result");
+            win.textContent="You Win!";
+            body.appendChild(win);
+            playerScore++;
         } 
         else if (winner == 1) {
+            const lose = document.createElement("h1");
+            lose.classList.add("result");
+            lose.textContent="You Lose";
+            body.appendChild(lose);
             computerScore++;
+        }
+        else {
+            const tie = document.createElement("h1");
+            tie.classList.add("result");
+            tie.textContent="You Lose";
+            body.appendChild(tie);
+            tieScore++;
         }
         // else {
         //     ii--;
         // }
     
     if (playerScore > computerScore) {
-        console.log("You win!");
+        // console.log("You win!");
         // return "You win!";
     }
     else {
-        console.log("You lose!");
+        // console.log("You lose!");
         // return "You lose!";
     }
 }
 
 
 function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    // e.target.classList.remove('playing');
+    if (e.propertyName !== 'background-color') return;
     e.target.classList.remove('clicked');
   }
 
 function playerSelection(e) {
     console.log(e.target.id);
     const choice = document.querySelector(`img[id=${e.target.id}]`);
-    console.log(choice);
     choice.classList.add('clicked');
-    choice;
+    game(e.target.id.toString());
 }
 
 const choices = Array.from(document.querySelectorAll('.choice'))
-choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
+// choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
 choices.forEach(choice => choice.addEventListener('click', playerSelection))
+choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
 
 game();
 // const playerSelection = "rock";
