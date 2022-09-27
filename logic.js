@@ -41,14 +41,14 @@ function playRound(player, computer) {
     }
 }
 
-function game() {
+function game(choice) {
     let winner, playerScore = 0, computerScore = 0;
-    for(var i = 0; i < 5; i++) {
-        let playerSelection = prompt("Rock, Paper, or Scissors...");
+        const body = document.querySelector('body');
+        // let playerSelection = prompt("Rock, Paper, or Scissors...");
         let computerSelection = getComputerChoice();
-        winner = playRound(playerSelection, computerSelection);
+        winner = playRound(choice, computerSelection);
         if (winner == 0) {
-            playerScore++;
+            body.appendChild()
         } 
         else if (winner == 1) {
             computerScore++;
@@ -56,7 +56,7 @@ function game() {
         // else {
         //     ii--;
         // }
-    }
+    
     if (playerScore > computerScore) {
         console.log("You win!");
         // return "You win!";
@@ -66,6 +66,25 @@ function game() {
         // return "You lose!";
     }
 }
+
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    // e.target.classList.remove('playing');
+    e.target.classList.remove('clicked');
+  }
+
+function playerSelection(e) {
+    console.log(e.target.id);
+    const choice = document.querySelector(`img[id=${e.target.id}]`);
+    console.log(choice);
+    choice.classList.add('clicked');
+    choice;
+}
+
+const choices = Array.from(document.querySelectorAll('.choice'))
+choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
+choices.forEach(choice => choice.addEventListener('click', playerSelection))
 
 game();
 // const playerSelection = "rock";
