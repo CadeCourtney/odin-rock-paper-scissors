@@ -42,40 +42,38 @@ function playRound(player, computer) {
 }
 
 function game(choice) {
-    const result = document.querySelector(".result")
+    // const result = document.querySelector(".result")
     const body = document.querySelector('body');
-    if(result != null) {
-        body.removeChild(result);
-    }
+    // if(result != null) {
+    //     body.removeChild(result);
+    // }
     let winner, playerScore = 0, computerScore = 0, tieScore = 0;
         // let playerSelection = prompt("Rock, Paper, or Scissors...");
         let computerSelection = getComputerChoice();
         winner = playRound(choice, computerSelection);
         console.log(winner);
         if (winner == 0) {
-            const win = document.createElement("h1");
-            win.classList.add("result");
+            const win = document.querySelector(".result");
+            // win.classList.add("result");
             win.textContent="You Win!";
             body.appendChild(win);
             playerScore++;
         } 
         else if (winner == 1) {
-            const lose = document.createElement("h1");
-            lose.classList.add("result");
-            lose.textContent="You Lose";
+            const lose = document.querySelector(".result");
+            // lose.classList.add("result");
+            lose.textContent="You Lose!";
             body.appendChild(lose);
             computerScore++;
+            const score = document.querySelector(".score");
         }
         else {
-            const tie = document.createElement("h1");
-            tie.classList.add("result");
-            tie.textContent="You Lose";
+            const tie = document.querySelector(".result");
+            // tie.classList.add("result");
+            tie.textContent="Tie!";
             body.appendChild(tie);
-            tieScore++;
+            // tieScore++;
         }
-        // else {
-        //     ii--;
-        // }
     
     if (playerScore > computerScore) {
         // console.log("You win!");
@@ -105,7 +103,7 @@ const choices = Array.from(document.querySelectorAll('.choice'))
 choices.forEach(choice => choice.addEventListener('click', playerSelection))
 choices.forEach(choice => choice.addEventListener('transitionend', removeTransition));
 
-game();
+// game();
 // const playerSelection = "rock";
 // const computerSelection = getComputerChoice();
 // console.log(computerSelection)
