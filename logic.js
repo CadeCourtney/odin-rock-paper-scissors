@@ -1,3 +1,5 @@
+let winner, playerScore = 0, computerScore = 0, tieScore = 0, numGames = 0;
+
 function getComputerChoice() {
     let choice = (Math.floor(Math.random() * 100) + 1) % 3;
     // console.log(choice);
@@ -42,15 +44,11 @@ function playRound(player, computer) {
 }
 
 function game(choice) {
-    // const result = document.querySelector(".result")
-    const body = document.querySelector('body');
-    // if(result != null) {
-    //     body.removeChild(result);
-    // }
-    let winner, playerScore = 0, computerScore = 0, tieScore = 0;
-        // let playerSelection = prompt("Rock, Paper, or Scissors...");
+    if (numGames < 5) {
+        const body = document.querySelector('body');
         let computerSelection = getComputerChoice();
         winner = playRound(choice, computerSelection);
+        numGames++;
         console.log(winner);
         if (winner == 0) {
             const win = document.querySelector(".result");
@@ -58,6 +56,8 @@ function game(choice) {
             win.textContent="You Win!";
             body.appendChild(win);
             playerScore++;
+            const score = document.querySelector(".score");
+            score.textContent=playerScore + " - Score - " + computerScore;
         } 
         else if (winner == 1) {
             const lose = document.querySelector(".result");
@@ -66,22 +66,34 @@ function game(choice) {
             body.appendChild(lose);
             computerScore++;
             const score = document.querySelector(".score");
+            score.textContent=playerScore + " - Score - " + computerScore;
         }
         else {
             const tie = document.querySelector(".result");
             // tie.classList.add("result");
             tie.textContent="Tie!";
             body.appendChild(tie);
+            numGames--;
             // tieScore++;
         }
-    
+        if(numGames > 4) {
     if (playerScore > computerScore) {
-        // console.log("You win!");
+        const won = document.querySelector(".result");
+            // tie.classList.add("result");
+            won.textContent="Winner!";
+            body.appendChild(won);
+        console.log("Winner!");
         // return "You win!";
     }
     else {
-        // console.log("You lose!");
+        const lost = document.querySelector(".result");
+            // tie.classList.add("result");
+            lost.textContent="Loser!";
+            body.appendChild(lost);
+        console.log("Loser!");
         // return "You lose!";
+    }
+}
     }
 }
 
